@@ -132,7 +132,7 @@
       const nextPts = parseFloat(document.getElementById("assignmentPoints").value);
       const target = parseFloat(document.getElementById("targetGrade").value);
       if (isNaN(current) || isNaN(total) || isNaN(nextPts) || isNaN(target)) {
-        showModal("Fill in everytging");
+        showModal("Fill in every box");
         return;
       }
       const required = ((target * (total + nextPts)) - (current * total)) / nextPts;
