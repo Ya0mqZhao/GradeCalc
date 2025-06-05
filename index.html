@@ -40,6 +40,10 @@
     <div class="theme-box" style="background: #fff3e0" onclick="setTheme('#fff3e0', '#e65100', '#ff9800', '#ef6c00', '#ffffff')"></div>
     <div class="theme-box" style="background: #263238" onclick="setTheme('#263238', '#ffffff', '#4fc3f7', '#0288d1', '#37474f')"></div>
     <div class="theme-box" style="background: #ffffff" onclick="setTheme('#ffffff', '#000000', '#2196f3', '#1976d2', '#f0f0f0')"></div>
+	<div class="theme-box" style="background: url('https://i.ibb.co/5gj5tv3X/image-removebg-preview.png') center/contain no-repeat white;" onclick="document.getElementById('bgUpload').click()" title="Upload Background"></div>
+	
+</div>
+<input type="file" id="bgUpload" accept="image/*" style="display:none" onchange="handleImageUpload(event)" />
   </div>
   <div id="modal" class="modal">
     <div class="modal-content">
@@ -83,23 +87,12 @@
     const required = ((target * (total + nextPts)) - (current * total)) / nextPts;
     const resultText = required <= 100 
       ? `Cool, get at least ${required.toFixed(2)}% on your next assignment :)`
-      : `You need at least ${required.toFixed(2)}% man you're cooked.`;
-    showModal(resultText);
-  }
-  function showModal(message) {
-    document.getElementById("modalText").innerText = message;
-    document.getElementById("modal").style.display = "flex";
-  }
-  function closeModal() {
-    document.getElementById("modal").style.display = "none";
-  }
-  function setTheme(bg, text, accent, hover, contentBg) {
-    document.documentElement.style.setProperty('--bg-color', bg);
-    document.documentElement.style.setProperty('--text-color', text);
-    document.documentElement.style.setProperty('--accent-color', accent);
-    document.documentElement.style.setProperty('--hover-color', hover);
-    document.documentElement.style.setProperty('--content-bg', contentBg);
-  }
+      : `You need at least ${required.toFixed(2)}% man you're cooked.`;showModal(resultText);}
+function showModal(message) {document.getElementById("modalText").innerText = message;document.getElementById("modal").style.display = "flex";}
+function closeModal() {document.getElementById("modal").style.display = "none";}
+function setTheme(bg, text, accent, hover, contentBg) {document.documentElement.style.setProperty('--bg-color', bg);document.documentElement.style.setProperty('--text-color', text);document.documentElement.style.setProperty('--accent-color', accent);document.documentElement.style.setProperty('--hover-color', hover);document.documentElement.style.setProperty('--content-bg', contentBg);document.body.style.backgroundImage = "";document.body.style.backgroundSize = "";document.body.style.backgroundRepeat = "";document.body.style.backgroundAttachment = "";}
+function handleImageUpload(event) {const file = event.target.files[0];if (!file) return;const reader = new FileReader();reader.onload = function(e) {const imageDataUrl = e.target.result;document.body.style.backgroundImage = `url('${imageDataUrl}')`;document.body.style.backgroundSize = "cover";document.body.style.backgroundRepeat = "no-repeat";document.body.style.backgroundAttachment = "fixed";document.documentElement.style.setProperty('--bg-color', 'transparent');document.documentElement.style.setProperty('--content-bg', 'rgba(255, 255, 255, 0.8)');event.target.value = "";};reader.readAsDataURL(file);}
+function setImageBackground(imageDataUrl) {document.body.style.backgroundImage = `url('${imageDataUrl}')`;document.body.style.backgroundSize = "cover";document.body.style.backgroundRepeat = "no-repeat";document.body.style.backgroundAttachment = "fixed";}
 </script>
   <p style="text-align: center; margin-top: 10px; font-size: 0.95rem; color: var(--textColor);">I have decision issue, pick a theme you like :)</p>
 </body>
